@@ -1,6 +1,8 @@
 {
   "sectionTitle": "PanelBridge 安裝方式",
   "appliesTo": "適用於 {{server}}。要變更其他伺服器，請先在「我的伺服器」頁面將其設為使用中的伺服器。",
+  "recommendWorkshopGuided": "此面板無法寫入該伺服器的遊戲資料夾，因此無法讓面板安裝的副本保持最新。請使用 Steam 工作坊。",
+  "compareMethods": "比較兩種方式",
   "serverChangedTitle": "使用中的伺服器已變更",
   "serverChangedBody": "開啟的 PanelBridge 對話框屬於先前的伺服器，因此已關閉。",
   "current": "目前",

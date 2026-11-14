@@ -286,6 +286,31 @@ describe('BridgeDeliveryPanel: the Lua integrity check', () => {
     expect(within(warning).getByRole('button', { name: en.action.switchToWorkshop })).toBeEnabled()
   })
 
+  it('recommends the Workshop first when the panel cannot write the game folder (guided Local), with one switch button', async () => {
+    renderPanel(makeLocalStatus({ access: 'guided', disk: null, state: 'local-unverified', checksum: { ...makeLocalStatus().checksum, current: null } }))
+    await panelReady()
+    const recommendation = screen.getByTestId('bridge-delivery-recommendation')
+    expect(within(recommendation).getByText(en.recommendWorkshopGuided)).toBeInTheDocument()
+    expect(within(recommendation).getByRole('button', { name: en.action.switchToWorkshop })).toBeEnabled()
+    // The #168 warning keeps its text but not a second copy of the button.
+    expect(within(screen.getByTestId('bridge-delivery-checksum-off')).queryByRole('button', { name: en.action.switchToWorkshop })).toBeNull()
+  })
+
+  it('shows no recommendation when the panel installs the bridge itself (automatic Local)', async () => {
+    renderPanel(makeLocalStatus())
+    await panelReady()
+    expect(screen.queryByTestId('bridge-delivery-recommendation')).toBeNull()
+  })
+
+  it('folds the method comparison by default', async () => {
+    renderPanel(makeLocalStatus())
+    await panelReady()
+    const compare = screen.getByTestId('bridge-delivery-compare')
+    expect(compare.tagName).toBe('DETAILS')
+    expect(compare).not.toHaveAttribute('open')
+    expect(within(compare).getByText(en.compareMethods)).toBeInTheDocument()
+  })
+
   it('shows the #168 warning for a guided Local server too (checksum unknown)', async () => {
     renderPanel(makeLocalStatus({ access: 'guided', disk: null, state: 'local-unverified', checksum: { ...makeLocalStatus().checksum, current: null } }))
     await panelReady()
