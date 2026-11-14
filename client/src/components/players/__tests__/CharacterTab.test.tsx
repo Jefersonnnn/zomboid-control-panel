@@ -255,11 +255,14 @@ describe('CharacterTab: availability states', () => {
     expect(screen.getByText('Carpentry')).toBeInTheDocument()
   })
 
-  it('bridgeOffline with nothing saved: the server-offline empty state with Retry', () => {
+  it('bridgeOffline with nothing saved: the disconnected empty state with Retry, never "Server Offline"', () => {
     const s = state({ base: response({ availability: 'bridgeOffline', sheet: null, cached: null, record: null, hintSource: null }) })
     renderTab(s)
     expect(screen.getByText('Character unavailable')).toBeInTheDocument()
-    expect(screen.getByText('Server Offline')).toBeInTheDocument()
+    // The game server is usually running (the player is online); only the
+    // PanelBridge link is missing.
+    expect(screen.getByText('Disconnected')).toBeInTheDocument()
+    expect(screen.queryByText('Server Offline')).toBeNull()
     expect(screen.getByText(/^PanelBridge is not connected\. Connect PanelBridge/)).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Retry' }))
     expect(s.retry).toHaveBeenCalled()

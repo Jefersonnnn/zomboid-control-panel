@@ -1846,7 +1846,9 @@ export default function Players() {
                         >
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2 min-w-0">
-                              <div className="w-2 h-2 rounded-full bg-primary motion-safe:animate-pulse shrink-0" aria-hidden="true" />
+                              {/* Steady dot: every online row pulsing at once was noise
+                                  (DESIGN.md keeps pulse for a state about to change). */}
+                              <div className="w-2 h-2 rounded-full bg-primary shrink-0" aria-hidden="true" />
                               <span className="font-medium truncate">{player.name}</span>
                               <span className="sr-only">{t('roster.tabOnline')}</span>
                               {note && note.tags && note.tags.length > 0 && (
@@ -2420,7 +2422,9 @@ export default function Players() {
                   actions that take any name (Unban, SteamID bans, Voice ban,
                   a new whitelist account) are in the page header's menu. */}
               <TabsContent value="moderation" className="mt-4">
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                {/* One action per row: three columns in the detail pane left
+                    each tile ~200px and clamped its description mid-sentence. */}
+                <div className="grid grid-cols-1 gap-2">
                   {/* Access Level */}
                   <DisabledReason className="w-full" reason={selectedPlayer && !canModerate ? t('permissions.noModerate') : null}>
                   <Dialog>

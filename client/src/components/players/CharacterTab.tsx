@@ -121,9 +121,12 @@ export function CharacterTab({
       )
     }
     const timedOut = availability === 'timeout'
+    // 'disconnected', not 'serverOffline': what is missing here is the
+    // PanelBridge link. The game server itself is usually up (the player is
+    // in the online list), and "Server offline" above that read as an outage.
     return (
       <EmptyState
-        type={timedOut ? 'noData' : 'serverOffline'}
+        type={timedOut ? 'noData' : 'disconnected'}
         compact
         title={t('character.state.unavailableTitle')}
         description={
