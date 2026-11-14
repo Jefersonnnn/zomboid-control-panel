@@ -3216,9 +3216,18 @@ export default function Debug() {
         <TabsContent value="diagnostics" className="mt-0 space-y-4">
           {/* First: what the logs say went wrong, with the fix for each. */}
           <ProblemsFound />
-          <p className="text-sm text-muted-foreground">
-            {t("diagnostics.tabSubtitle")}
-          </p>
+          {/* Second part of the tab, named like the first: without a heading
+              the setup checks read as a tail of "Problems found" above, and
+              their "All systems operational" could seem to contradict it. */}
+          <div className="space-y-1 pt-2">
+            <h2 className="flex items-center gap-2 text-base font-semibold leading-tight text-foreground">
+              <Settings className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+              {t("diagnostics.sectionTitle")}
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {t("diagnostics.tabSubtitle")}
+            </p>
+          </div>
           {diagnosticsError && (
             <PageAlerts
               alerts={[

@@ -2,6 +2,10 @@
   "title": "Problèmes détectés",
   "description": "Erreurs du dernier journal du serveur et du panneau, chacune avec la marche à suivre.",
   "rescan": "Réanalyser",
+  "info": {
+    "show": "Afficher les infos ({{n}})",
+    "hide": "Masquer les infos"
+  },
   "scanning": "Analyse…",
   "scanDone": "Analyse terminée",
   "scanDoneCount": "Problèmes détectés : {{n}}",

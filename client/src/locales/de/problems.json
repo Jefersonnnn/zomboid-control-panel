@@ -2,6 +2,10 @@
   "title": "Gefundene Probleme",
   "description": "Fehler aus dem letzten Log des Servers und aus dem Panel, jeweils mit dem, was zu tun ist.",
   "rescan": "Erneut prüfen",
+  "info": {
+    "show": "Hinweise anzeigen ({{n}})",
+    "hide": "Hinweise ausblenden"
+  },
   "scanning": "Wird geprüft…",
   "scanDone": "Prüfung abgeschlossen",
   "scanDoneCount": "Gefundene Probleme: {{n}}",

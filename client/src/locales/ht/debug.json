@@ -257,6 +257,7 @@
     "overallPending": "Ap egzekite verifikasyon…",
     "lastChecked": "Dènye verifye {{time}} · {{duration}}ms · otoaktyalize chak 30s",
     "runningDescription": "Ap egzekite verifikasyon entelijan atravè sèvis, chemen, depo, ak mizajou…",
+    "sectionTitle": "Verifikasyon konfigirasyon",
     "tabSubtitle": "Verifye enstalasyon ou pou pwoblèm epi ofri korije yon sèl klik.",
     "categories": {
       "services": "Sèvis prensipal yo",

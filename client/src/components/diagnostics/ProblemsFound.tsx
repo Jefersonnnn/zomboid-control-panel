@@ -87,6 +87,20 @@ export function ProblemsFound() {
   const findings = useMemo(() => data?.findings ?? [], [data])
   const open = useMemo(() => findings.filter((f) => !fixed.has(f.id)), [findings, fixed])
   const groups = useMemo(() => groupFindings(findings), [findings])
+  // "Info" findings (often harmless log noise) fold away while there is a
+  // critical or warning to act on; with nothing else to show they stay open.
+  const [showInfo, setShowInfo] = useState(false)
+  const infoCount = useMemo(() => findings.filter((f) => f.severity === 'info').length, [findings])
+  const infoFolded = !showInfo && infoCount > 0 && infoCount < findings.length
+  const visibleGroups = useMemo(
+    () =>
+      infoFolded
+        ? groups
+            .map((group) => ({ ...group, findings: group.findings.filter((f) => f.severity !== 'info') }))
+            .filter((group) => group.findings.length > 0)
+        : groups,
+    [groups, infoFolded],
+  )
   const hasSafeFix = open.some((f) => f.fixes.some((fix) => isActionFix(fix) && fix.safe && can(fix.capability)))
 
   const markFixed = useCallback((ids: string[]) => {
@@ -351,7 +365,7 @@ export function ProblemsFound() {
               ]}
             />
             <p className="text-xs text-muted-foreground">{checkedDescription}{log?.partial ? ` ${t('partialLog')}` : ''}</p>
-            {groups.map((group) => (
+            {visibleGroups.map((group) => (
               <section key={group.category} aria-labelledby={`problems-${group.category}`} className="space-y-2">
                 <h3 id={`problems-${group.category}`} className="flex items-baseline gap-2 text-sm font-medium text-foreground">
                   {t(`category.${group.category}`)}
@@ -360,6 +374,18 @@ export function ProblemsFound() {
                 <ul className="space-y-2">{group.findings.map(row)}</ul>
               </section>
             ))}
+            {infoCount > 0 && infoCount < findings.length && (
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 rounded-md text-xs text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-expanded={showInfo}
+                onClick={() => setShowInfo((v) => !v)}
+                data-testid="problems-info-toggle"
+              >
+                {showInfo ? <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" /> : <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />}
+                {showInfo ? t('info.hide') : t('info.show', { n: infoCount })}
+              </button>
+            )}
           </>
         )}
       </div>

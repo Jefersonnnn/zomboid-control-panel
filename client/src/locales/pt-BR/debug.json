@@ -257,6 +257,7 @@
     "overallPending": "Executando verificações…",
     "lastChecked": "Última verificação: {{time}} · {{duration}}ms · recarrega automaticamente a cada 30s",
     "runningDescription": "Executando verificações inteligentes de serviços, caminhos, armazenamento e atualizações…",
+    "sectionTitle": "Verificações da configuração",
     "tabSubtitle": "Verifica sua configuração em busca de problemas e oferece correções com um clique.",
     "categories": {
       "services": "Serviços principais",
