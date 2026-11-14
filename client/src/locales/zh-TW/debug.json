@@ -252,6 +252,7 @@
     "overallPending": "正在執行檢查…",
     "lastChecked": "上次檢查：{{time}} · {{duration}} 毫秒 · 每 30 秒自動重新整理",
     "runningDescription": "正在對服務、路徑、儲存和更新執行智慧檢查……",
+    "sectionTitle": "設定檢查",
     "tabSubtitle": "檢查您的設定是否有問題，並提供一鍵修復。",
     "categories": {
       "services": "核心服務",

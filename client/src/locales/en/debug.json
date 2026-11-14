@@ -252,6 +252,7 @@
     "overallPending": "Running checks…",
     "lastChecked": "Last checked {{time}} · {{duration}}ms · auto-refreshes every 30s",
     "runningDescription": "Running smart checks across services, paths, storage, and updates…",
+    "sectionTitle": "Setup checks",
     "tabSubtitle": "Checks your setup for problems and offers one-click fixes.",
     "categories": {
       "services": "Core Services",

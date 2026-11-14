@@ -2,6 +2,10 @@
   "title": "Problemas encontrados",
   "description": "Erros do último log do servidor e do painel, cada um com o que fazer a respeito.",
   "rescan": "Analisar de novo",
+  "info": {
+    "show": "Mostrar informações ({{n}})",
+    "hide": "Ocultar informações"
+  },
   "scanning": "Analisando…",
   "scanDone": "Análise concluída",
   "scanDoneCount": "Problemas encontrados: {{n}}",

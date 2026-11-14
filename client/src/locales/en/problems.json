@@ -2,6 +2,10 @@
   "title": "Problems found",
   "description": "Errors from the server's latest log and from the panel, each with what to do about it.",
   "rescan": "Re-scan",
+  "info": {
+    "show": "Show info ({{n}})",
+    "hide": "Hide info"
+  },
   "scanning": "Scanning…",
   "scanDone": "Scan finished",
   "scanDoneCount": "Problems found: {{n}}",

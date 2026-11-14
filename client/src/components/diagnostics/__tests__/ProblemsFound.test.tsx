@@ -90,6 +90,29 @@ describe('Problems found', () => {
     expect(within(row).getByRole('link', { name: 'Open Mods' })).toHaveAttribute('href', '/mods?view=active')
   })
 
+  it('folds "info" findings while there are criticals or warnings, and shows them on demand', async () => {
+    renderIt()
+    expect(await screen.findByText('The server ran out of memory')).toBeInTheDocument()
+    // The demo's one info finding (a missing tile, usually harmless) starts folded.
+    expect(screen.queryByText(/CellLoader> missing tile/)).toBeNull()
+    const toggle = screen.getByTestId('problems-info-toggle')
+    expect(toggle).toHaveTextContent('Show info (1)')
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    fireEvent.click(toggle)
+    expect(screen.getByText(/CellLoader> missing tile/)).toBeInTheDocument()
+    expect(toggle).toHaveTextContent('Hide info')
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('shows "info" findings without a toggle when they are all there is', async () => {
+    const onlyInfo = getDemoProblems(Date.parse('2026-10-20T12:00:00Z'))
+    onlyInfo.findings = onlyInfo.findings.filter((f) => f.severity === 'info')
+    onlyInfo.counts = { critical: 0, warning: 0, info: onlyInfo.findings.length, total: onlyInfo.findings.length }
+    renderIt(onlyInfo)
+    expect(await screen.findByText(/CellLoader> missing tile/)).toBeInTheDocument()
+    expect(screen.queryByTestId('problems-info-toggle')).toBeNull()
+  })
+
   it('shows the scan in StrictMode too (an unmount/remount must not leave it scanning forever)', async () => {
     vi.mocked(debugApi.getProblems).mockResolvedValue(getDemoProblems())
     render(

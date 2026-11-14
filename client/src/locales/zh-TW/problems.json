@@ -2,6 +2,10 @@
   "title": "發現的問題",
   "description": "來自伺服器最新日誌和面板的錯誤，每則都附有處理方式。",
   "rescan": "重新掃描",
+  "info": {
+    "show": "顯示資訊（{{n}}）",
+    "hide": "隱藏資訊"
+  },
   "scanning": "掃描中…",
   "scanDone": "掃描完成",
   "scanDoneCount": "發現的問題：{{n}}",

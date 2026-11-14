@@ -252,6 +252,7 @@
     "overallPending": "Prüfungen laufen…",
     "lastChecked": "Zuletzt geprüft: {{time}} · {{duration}}ms · aktualisiert automatisch alle 30s",
     "runningDescription": "Intelligente Prüfungen für Dienste, Pfade, Speicher und Updates…",
+    "sectionTitle": "Einrichtungsprüfungen",
     "tabSubtitle": "Prüft deine Einrichtung auf Probleme und bietet Korrekturen mit einem Klick.",
     "categories": {
       "services": "Kerndienste",

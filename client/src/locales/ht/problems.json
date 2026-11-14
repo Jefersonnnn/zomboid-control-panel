@@ -2,6 +2,10 @@
   "title": "Pwoblèm yo jwenn",
   "description": "Erè ki soti nan dènye jounal sèvè a ak nan panèl la, chak ak sa pou fè.",
   "rescan": "Analize ankò",
+  "info": {
+    "show": "Montre enfòmasyon ({{n}})",
+    "hide": "Kache enfòmasyon"
+  },
   "scanning": "Ap analize…",
   "scanDone": "Analiz fini",
   "scanDoneCount": "Pwoblèm yo jwenn: {{n}}",
