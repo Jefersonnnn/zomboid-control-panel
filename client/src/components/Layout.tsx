@@ -1065,11 +1065,10 @@ export default function Layout({ children }: LayoutProps) {
                   </span>
                   <span className="brand-led" aria-hidden title={t('panelStatus.online')} />
                 </div>
-                <div className="flex items-center gap-1.5 text-micro font-medium uppercase leading-none tracking-[0.2em] text-muted-foreground/80">
+                {/* The version lives in the footer toolbar only: beside the
+                    subtitle it cut "Control Panel" short in 231px. */}
+                <div className="flex items-center text-micro font-medium uppercase leading-none tracking-[0.2em] text-muted-foreground/80">
                   <span className="shell-brand-subtitle truncate uppercase">{t('brand.shortSubtitle')}</span>
-                  <span className="brand-strip__version font-mono normal-case tracking-normal text-muted-foreground/55">
-                    v{panelVersion || (typeof __PANEL_VERSION__ !== 'undefined' ? __PANEL_VERSION__ : '0')}
-                  </span>
                 </div>
               </div>
             )}
@@ -1134,9 +1133,9 @@ export default function Layout({ children }: LayoutProps) {
             }
 
             return (
-              <div key={section.id} className="mt-3">
+              <div key={section.id} className="mt-5">
                 {/* Lane label */}
-                <div className="mb-1 flex items-center gap-2 px-2">
+                <div className="mb-1.5 flex items-center gap-2 px-2">
                   <span className={cn('h-px w-3 rounded-full', tone.bar)} aria-hidden="true" />
                   <span className={cn('label-micro leading-none', tone.label)}>
                     {t(section.labelKey)}
@@ -1176,7 +1175,7 @@ export default function Layout({ children }: LayoutProps) {
                 href={KOFI_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-full items-center justify-center gap-1.5 rounded-md bg-[#72a4f2] px-2 text-xs font-semibold text-[#0f2340] shadow-sm transition-[filter] hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card [@media(pointer:coarse)]:h-9"
+                className="flex h-7 w-full items-center justify-center gap-1.5 rounded-md px-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent/30 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [@media(pointer:coarse)]:h-9"
               >
                 <KofiCup className="h-4 w-4 shrink-0" />
                 {t('footer.supportMeKofi')}
@@ -1273,7 +1272,7 @@ export default function Layout({ children }: LayoutProps) {
                     href={KOFI_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid h-7 w-7 place-items-center rounded-md bg-[#72a4f2] shadow-sm transition-[filter] hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                    className={FOOTER_ICON_BUTTON}
                     aria-label={`${t('footer.supportMeKofi')} ${t('footer.opensInNewTab')}`}
                   >
                     <KofiCup className="h-4 w-4" />
