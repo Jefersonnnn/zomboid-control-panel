@@ -95,6 +95,8 @@
     "windowsPath": "Windows:",
     "linuxPath": "Linux:",
     "linuxHint": "(or wherever the server runs from)",
+    "dockerPath": "Docker:",
+    "dockerHint": "(the path inside the panel container, the right-hand side of its volume mount)",
     "mustContain": "It must contain a <1>Saves/Multiplayer/</1> subfolder once the server has been started at least once.",
     "pointDirect": "You can also point directly at a single save folder (e.g. <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "Set custom path",

@@ -95,6 +95,8 @@
     "windowsPath": "Windows:",
     "linuxPath": "Linux:",
     "linuxHint": "(ou onde quer que o servidor seja executado)",
+    "dockerPath": "Docker:",
+    "dockerHint": "(o caminho dentro do contêiner do painel, o lado direito do volume montado)",
     "mustContain": "Ela precisa conter uma subpasta <1>Saves/Multiplayer/</1> depois que o servidor tiver sido iniciado pelo menos uma vez.",
     "pointDirect": "Você também pode apontar direto para a pasta de um único save (ex.: <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "Definir caminho personalizado",

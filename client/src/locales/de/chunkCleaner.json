@@ -95,6 +95,8 @@
     "windowsPath": "Windows:",
     "linuxPath": "Linux:",
     "linuxHint": "(oder wo auch immer der Server ausgeführt wird)",
+    "dockerPath": "Docker:",
+    "dockerHint": "(der Pfad im Panel-Container, die rechte Seite der Volume-Einbindung)",
     "mustContain": "Er muss einen <1>Saves/Multiplayer/</1>-Unterordner enthalten, sobald der Server mindestens einmal gestartet wurde.",
     "pointDirect": "Du kannst auch direkt auf einen einzelnen Spielstandordner zeigen (z. B. <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "Eigenen Pfad festlegen",

@@ -2868,6 +2868,15 @@ export default function ChunkCleaner() {
                           </span>{" "}
                           {t("canvas.linuxHint")}
                         </li>
+                        {/* A panel in Docker sees the data folder at its own
+                            mount point, never the host path. */}
+                        <li>
+                          {t("canvas.dockerPath")}{" "}
+                          <span className="font-mono text-foreground/80">
+                            /zomboid
+                          </span>{" "}
+                          {t("canvas.dockerHint")}
+                        </li>
                         <li>
                           <Trans
                             i18nKey="canvas.mustContain"

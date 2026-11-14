@@ -95,6 +95,8 @@
     "windowsPath": "Windows:",
     "linuxPath": "Linux:",
     "linuxHint": "(o donde sea que se ejecute el servidor)",
+    "dockerPath": "Docker:",
+    "dockerHint": "(la ruta dentro del contenedor del panel, el lado derecho del volumen montado)",
     "mustContain": "Debe contener una subcarpeta <1>Saves/Multiplayer/</1> una vez que el servidor se haya iniciado al menos una vez.",
     "pointDirect": "También se puede apuntar directamente a una única carpeta de partida guardada (p. ej. <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "Establecer ruta personalizada",
