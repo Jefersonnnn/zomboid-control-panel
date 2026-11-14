@@ -39,6 +39,7 @@
     "ariaLabel": "Status do servidor",
     "mapTooltip": "Mapa (via PanelBridge)",
     "remoteBadge": "remoto",
+    "containerTooltip": "Contêiner Docker que roda este servidor",
     "noActiveServer": "Nenhum servidor ativo",
     "state": {
       "running": "Rodando",

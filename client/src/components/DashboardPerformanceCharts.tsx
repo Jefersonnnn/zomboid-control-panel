@@ -228,11 +228,12 @@ function DashboardPerformanceCharts({
           <div
             key={m.key}
             className={cn(
-              'grid h-10 grid-cols-[6.5rem_minmax(0,1fr)_auto_2.75rem] items-center gap-4 px-4',
+              'grid h-11 grid-cols-[6rem_minmax(0,1fr)_auto_2.5rem] items-center gap-3 px-4 sm:grid-cols-[8.5rem_minmax(0,1fr)_auto_2.75rem] sm:gap-4',
               TONE_CELL[tone],
             )}
           >
-            <span className="truncate font-mono text-[9px] font-medium uppercase tracking-[0.14em] text-muted-foreground/65">
+            {/* A label, not data: sans at text-xs (DESIGN.md: mono is for data only). */}
+            <span className="truncate text-xs font-medium text-muted-foreground" title={m.label}>
               {m.label}
             </span>
 
@@ -273,14 +274,14 @@ function DashboardPerformanceCharts({
                   <bdi>{m.value}</bdi>
                 </span>
                 {m.unit && (
-                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground/55">
+                  <span className="text-xs text-muted-foreground/80">
                     {m.unit}
                   </span>
                 )}
               </span>
             </div>
 
-            <span className="text-end font-mono text-[11px] tabular-nums text-muted-foreground/50">
+            <span className="text-end font-mono text-xs tabular-nums text-muted-foreground/70">
               {m.key === 'pzMem' ? t('normal') : pct != null && m.unit !== '%' ? `${Math.round(pct)}%` : ''}
             </span>
           </div>

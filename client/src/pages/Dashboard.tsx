@@ -8,7 +8,7 @@ import {
   Play, Square, RotateCcw, Save, Wifi, Loader2, AlertTriangle, RefreshCw, AlertCircle, Check,
   LogIn, LogOut, Activity, Archive, Skull, Sword, ShieldAlert, Copy, Gamepad2, Globe, FolderOpen,
   X, Zap, Trash2, CalendarClock, Monitor, ScrollText, FileCog, Plus, Cpu, ListChecks, Wrench, HeartPulse,
-  Map as MapIcon,
+  Map as MapIcon, Container,
 } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
@@ -1698,6 +1698,15 @@ export default function Dashboard() {
           {t('header.remoteBadge')}
         </span>
       )}
+      {/* The Docker container that runs this server: Start/Stop/Restart go
+          through it, so name it where the operator looks first. */}
+      {provider === 'docker-local' && (activeServer?.dockerContainerName || activeServer?.dockerContainerId) && (
+        <span className="inline-flex items-center gap-1" title={t('header.containerTooltip')}>
+          <Container className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          <span className="sr-only">{t('header.containerTooltip')}: </span>
+          <span className="font-mono">{activeServer?.dockerContainerName || activeServer?.dockerContainerId?.slice(0, 12)}</span>
+        </span>
+      )}
       {status?.localIp && addressChip('lan', Wifi, `${status.localIp}${gamePort}`, `${status.localIp}${gamePort}`)}
       {status?.publicIp && addressChip('wan', Globe, `${status.publicIp}${gamePort}`, `${status.publicIp}${gamePort}`)}
       {panelInfo && addressChip('panel', Monitor, `${panelInfo.localIp}:${panelInfo.port}`, panelInfo.url)}
@@ -2166,6 +2175,69 @@ export default function Dashboard() {
               </ol>
             )}
           </SectionCard>
+
+          {/* MAINTENANCE: refresh is the header's icon (and R), Wipe is in
+              the header's menu; what stays here is the routine pair. In the
+              wide column (not the side one) so both columns end close
+              together; full width when telemetry and activity sit side by side. */}
+          {!isRemote && (
+            <SectionCard title={t('maintenance.heading')} icon={Wrench} density="compact" className="2xl:col-span-2">
+              <DisabledReason
+                className="w-full sm:w-auto"
+                reason={!canManageBackups ? t('actions.noPermissionCreateBackup') : null}
+              >
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="w-full justify-start sm:w-auto"
+                  disabled={!hasServer || loading !== null || isRemote || !canManageBackups}
+                  onClick={createBackupNow}
+                >
+                  {loading === 'Create backup' ? <Loader2 className="animate-spin" aria-hidden="true" /> : <Archive aria-hidden="true" />}
+                  {t('maintenance.createBackup')}
+                </Button>
+              </DisabledReason>
+              {/* With the servers overview on screen, each row has its own. */}
+              {!serversOverviewShown && (
+              <div className="grid gap-3 md:grid-cols-2">
+              <div className="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/25 p-3">
+                <div className="min-w-0">
+                  <Label htmlFor="autoStartServer" className="text-sm font-medium">
+                    {t('maintenance.autoStartLabel')}
+                  </Label>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{t('maintenance.autoStartDesc')}</p>
+                </div>
+                <DisabledReason reason={!canChangePanelSettings ? t('actions.noPermissionAutoStart') : null}>
+                  <Switch
+                    id="autoStartServer"
+                    checked={autoStartThisServer}
+                    disabled={!canChangePanelSettings}
+                    onCheckedChange={(checked) => handleAutoStartChange(checked === true)}
+                  />
+                </DisabledReason>
+              </div>
+              {activeServer && !activeServer.isRemote && (
+              <div className="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/25 p-3">
+                <div className="min-w-0">
+                  <Label htmlFor="restartOnCrash" className="text-sm font-medium">
+                    {t('serversOverview.restartOnCrashLabel')}
+                  </Label>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{t('serversOverview.restartOnCrashHint')}</p>
+                </div>
+                <DisabledReason reason={!canChangePanelSettings ? t('actions.noPermissionAutoStart') : null}>
+                  <Switch
+                    id="restartOnCrash"
+                    checked={restartOnCrashThisServer}
+                    disabled={!canChangePanelSettings}
+                    onCheckedChange={(checked) => handleRestartOnCrashChange(checked === true)}
+                  />
+                </DisabledReason>
+              </div>
+              )}
+              </div>
+              )}
+            </SectionCard>
+          )}
         </div>
 
         {/* ════ WORK ════ */}
@@ -2193,65 +2265,6 @@ export default function Dashboard() {
               />
             </div>
           </SectionCard>
-
-          {/* MAINTENANCE: refresh is the header's icon (and R), Wipe is in
-              the header's menu; what stays here is the routine pair. */}
-          {!isRemote && (
-            <SectionCard title={t('maintenance.heading')} icon={Wrench} density="compact">
-              <DisabledReason
-                className="w-full"
-                reason={!canManageBackups ? t('actions.noPermissionCreateBackup') : null}
-              >
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-full justify-start"
-                  disabled={!hasServer || loading !== null || isRemote || !canManageBackups}
-                  onClick={createBackupNow}
-                >
-                  {loading === 'Create backup' ? <Loader2 className="animate-spin" aria-hidden="true" /> : <Archive aria-hidden="true" />}
-                  {t('maintenance.createBackup')}
-                </Button>
-              </DisabledReason>
-              {/* With the servers overview on screen, each row has its own. */}
-              {!serversOverviewShown && (
-              <div className="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/25 p-3">
-                <div className="min-w-0">
-                  <Label htmlFor="autoStartServer" className="text-sm font-medium">
-                    {t('maintenance.autoStartLabel')}
-                  </Label>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{t('maintenance.autoStartDesc')}</p>
-                </div>
-                <DisabledReason reason={!canChangePanelSettings ? t('actions.noPermissionAutoStart') : null}>
-                  <Switch
-                    id="autoStartServer"
-                    checked={autoStartThisServer}
-                    disabled={!canChangePanelSettings}
-                    onCheckedChange={(checked) => handleAutoStartChange(checked === true)}
-                  />
-                </DisabledReason>
-              </div>
-              )}
-              {!serversOverviewShown && activeServer && !activeServer.isRemote && (
-              <div className="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/25 p-3">
-                <div className="min-w-0">
-                  <Label htmlFor="restartOnCrash" className="text-sm font-medium">
-                    {t('serversOverview.restartOnCrashLabel')}
-                  </Label>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{t('serversOverview.restartOnCrashHint')}</p>
-                </div>
-                <DisabledReason reason={!canChangePanelSettings ? t('actions.noPermissionAutoStart') : null}>
-                  <Switch
-                    id="restartOnCrash"
-                    checked={restartOnCrashThisServer}
-                    disabled={!canChangePanelSettings}
-                    onCheckedChange={(checked) => handleRestartOnCrashChange(checked === true)}
-                  />
-                </DisabledReason>
-              </div>
-              )}
-            </SectionCard>
-          )}
 
           {bridgeStatus && !bridgeStatus.configured && (
             <div className="rounded-lg border border-border/60 bg-muted/40 p-3 text-sm">

@@ -38,6 +38,7 @@
     "ariaLabel": "Serverstatus",
     "mapTooltip": "Karte (von PanelBridge)",
     "remoteBadge": "Remote",
+    "containerTooltip": "Docker-Container, in dem dieser Server läuft",
     "noActiveServer": "Kein aktiver Server",
     "state": {
       "running": "Läuft",

@@ -38,6 +38,7 @@
     "ariaLabel": "服务器状态",
     "mapTooltip": "地图（来自 PanelBridge）",
     "remoteBadge": "远程",
+    "containerTooltip": "运行此服务器的 Docker 容器",
     "noActiveServer": "没有活动服务器",
     "state": {
       "running": "运行中",

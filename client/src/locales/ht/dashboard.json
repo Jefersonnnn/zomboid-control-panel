@@ -39,6 +39,7 @@
     "ariaLabel": "Estati sèvè",
     "mapTooltip": "Kat (soti nan PanelBridge)",
     "remoteBadge": "aleka",
+    "containerTooltip": "Kontenè Docker ki fè sèvè sa a mache",
     "noActiveServer": "Pa gen sèvè aktif",
     "state": {
       "running": "Ap mache",

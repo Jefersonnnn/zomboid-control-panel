@@ -38,6 +38,7 @@
     "ariaLabel": "伺服器狀態",
     "mapTooltip": "地圖（來自 PanelBridge）",
     "remoteBadge": "遠端",
+    "containerTooltip": "執行此伺服器的 Docker 容器",
     "noActiveServer": "沒有活動伺服器",
     "state": {
       "running": "執行中",

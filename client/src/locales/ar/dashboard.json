@@ -112,6 +112,7 @@
     "ariaLabel": "حالة الخادم",
     "mapTooltip": "الخريطة (من PanelBridge)",
     "remoteBadge": "بعيد",
+    "containerTooltip": "حاوية Docker التي تشغّل هذا الخادم",
     "noActiveServer": "لا يوجد خادم نشط",
     "state": {
       "running": "يعمل",

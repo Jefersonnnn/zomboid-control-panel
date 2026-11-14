@@ -76,6 +76,7 @@
     "ariaLabel": "Стан сервера",
     "mapTooltip": "Карта (з PanelBridge)",
     "remoteBadge": "віддалений",
+    "containerTooltip": "Контейнер Docker, у якому працює цей сервер",
     "noActiveServer": "Немає активного сервера",
     "state": {
       "running": "Працює",
