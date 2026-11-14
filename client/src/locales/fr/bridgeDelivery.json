@@ -1,6 +1,8 @@
 {
   "sectionTitle": "Mode d'installation de PanelBridge",
   "appliesTo": "S'applique à {{server}}. Pour modifier un autre serveur, rendez-le actif sur la page Mes serveurs.",
+  "recommendWorkshopGuided": "Ce panneau ne peut pas écrire dans le dossier du jeu de ce serveur et ne peut donc pas tenir à jour la copie installée par le panneau. Utilisez le Workshop Steam.",
+  "compareMethods": "Comparer les deux méthodes",
   "serverChangedTitle": "Serveur actif changé",
   "serverChangedBody": "La fenêtre PanelBridge ouverte concernait le serveur précédent ; elle a donc été fermée.",
   "current": "Actuel",

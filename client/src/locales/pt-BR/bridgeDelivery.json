@@ -1,6 +1,8 @@
 {
   "sectionTitle": "Como o PanelBridge é instalado",
   "appliesTo": "Aplica-se a {{server}}. Para alterar outro servidor, ative-o na página Meus servidores.",
+  "recommendWorkshopGuided": "Este painel não consegue gravar na pasta do jogo deste servidor, então não mantém a cópia instalada pelo painel atualizada. Use a Workshop da Steam.",
+  "compareMethods": "Comparar os dois métodos",
   "serverChangedTitle": "O servidor ativo mudou",
   "serverChangedBody": "A janela do PanelBridge aberta era do servidor anterior, por isso foi fechada.",
   "current": "Atual",

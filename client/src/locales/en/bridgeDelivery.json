@@ -1,6 +1,8 @@
 {
   "sectionTitle": "How PanelBridge is installed",
   "appliesTo": "Applies to {{server}}. To change another server, make it active on the Servers page.",
+  "recommendWorkshopGuided": "This panel can't write to this server's game folder, so it can't keep the panel-installed copy up to date. Use the Steam Workshop.",
+  "compareMethods": "Compare the two methods",
   "serverChangedTitle": "Active server changed",
   "serverChangedBody": "The open PanelBridge dialog was for the previous server, so it was closed.",
   "current": "Current",

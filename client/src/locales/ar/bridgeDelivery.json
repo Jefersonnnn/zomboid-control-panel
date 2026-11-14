@@ -1,6 +1,8 @@
 {
   "sectionTitle": "طريقة تثبيت PanelBridge",
   "appliesTo": "ينطبق على {{server}}. لتغيير خادم آخر، اجعله الخادم النشط من صفحة «خوادمي».",
+  "recommendWorkshopGuided": "لا تستطيع هذه اللوحة الكتابة في مجلد اللعبة لهذا الخادم، لذا لا يمكنها إبقاء النسخة المثبتة من اللوحة محدّثة. استخدم Steam Workshop.",
+  "compareMethods": "قارن بين الطريقتين",
   "serverChangedTitle": "تغيّر الخادم النشط",
   "serverChangedBody": "كانت نافذة PanelBridge المفتوحة تخص الخادم السابق، لذا أُغلقت.",
   "current": "الحالية",

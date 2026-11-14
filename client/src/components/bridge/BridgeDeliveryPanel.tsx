@@ -16,6 +16,7 @@ import {
   RefreshCw,
   RotateCw,
   ShieldCheck,
+  ChevronDown,
 } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
@@ -411,6 +412,47 @@ export function BridgeDeliveryPanel({ activeServerId, iniFileName, playerCount }
     )
   }
 
+  // Guided access means the panel cannot write the game folder (read-only
+  // mount, a separate container, a remote host): it can't keep the
+  // panel-installed copy in place by itself, so the Workshop is the method to
+  // pick. Say so first, with its button, instead of leaving the operator to
+  // work it out from the comparison below.
+  const recommendsWorkshop = (s: DeliveryStatus) => s.method === 'local' && s.access === 'guided'
+
+  const renderRecommendation = (s: DeliveryStatus) => {
+    if (!recommendsWorkshop(s)) return null
+    const workshop = s.switchAvailability.toWorkshop
+    const blocked = !workshop.available && workshop.reason && workshop.reason !== 'sameMethod'
+      ? t(getBlockReasonKey(workshop.reason, s.sharedWith.length > 0), getAvailabilityParams(s, i18n.language))
+      : null
+    const reason = noBridgeSetupReason ?? blocked
+    return (
+      <div
+        className="flex flex-col gap-3 rounded-lg border border-primary/40 bg-primary/5 p-3 sm:flex-row sm:items-center sm:justify-between"
+        data-testid="bridge-delivery-recommendation"
+      >
+        <p className="flex items-start gap-2 text-sm">
+          <Cloud className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+          <span>{t('recommendWorkshopGuided')}</span>
+        </p>
+        {(workshop.available || blocked) && (
+          <DisabledReason reason={reason} className="max-w-full shrink-0">
+            <Button
+              type="button"
+              size="sm"
+              className={WRAPPING_BUTTON}
+              disabled={Boolean(reason) || pending !== null}
+              onClick={() => onAction('switchToWorkshop')}
+            >
+              <Cloud className="h-3.5 w-3.5" />
+              {t('action.switchToWorkshop')}
+            </Button>
+          </DisabledReason>
+        )}
+      </div>
+    )
+  }
+
   const renderChecksum = (s: DeliveryStatus) => {
     // #168: with the panel-installed bridge the integrity check has to stay
     // off, and the operator should know what that costs (§4.3). `null`
@@ -427,7 +469,8 @@ export function BridgeDeliveryPanel({ activeServerId, iniFileName, playerCount }
           <AlertTitle className="text-warning">{t('checksumOff.title')}</AlertTitle>
           <AlertDescription className="space-y-2">
             <p>{t('checksumOff.body')}</p>
-            {(workshop.available || blocked) && (
+            {/* The recommendation above already carries this button. */}
+            {!recommendsWorkshop(s) && (workshop.available || blocked) && (
               <DisabledReason reason={reason} className="max-w-full">
                 <Button
                   type="button"
@@ -681,15 +724,25 @@ export function BridgeDeliveryPanel({ activeServerId, iniFileName, playerCount }
       {status && (
         <>
           {renderStateCallout(status)}
+          {renderRecommendation(status)}
           {renderBanners(status)}
           {renderChecksum(status)}
           {showGuidedReminder(status) && (
             <BridgeGuidedSteps to="workshop" manual={getGuidedWorkshopManual(status)} iniFileName={statusIniFileName} />
           )}
-          <div className="grid gap-3 sm:grid-cols-2">
-            {renderOptionCard(status, 'local')}
-            {renderOptionCard(status, 'workshop')}
-          </div>
+          {/* The pros and cons of both methods, folded: the state, the
+              recommendation and the warnings above already say what to do;
+              this is for an operator who wants the reasons. */}
+          <details className="group rounded-lg border border-border/60" data-testid="bridge-delivery-compare">
+            <summary className="flex cursor-pointer list-none items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+              <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+              {t('compareMethods')}
+            </summary>
+            <div className="grid gap-3 p-3 pt-0 sm:grid-cols-2">
+              {renderOptionCard(status, 'local')}
+              {renderOptionCard(status, 'workshop')}
+            </div>
+          </details>
           {status.method === 'workshop' && (
             <p className={cn('flex items-start gap-2 rounded-lg border p-3 text-xs text-muted-foreground', NEUTRAL_CALLOUT)}>
               <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
