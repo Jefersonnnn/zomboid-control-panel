@@ -2209,6 +2209,11 @@ export default function Servers() {
             const containerStats = container ? dockerStats[container.id] || dockerStats[container.name] : undefined
             const branch = (server.isActive ? updateInfo?.installed?.branch : undefined) || server.branch
             const steamReason = !canServerInstall ? t('steamDialog.noPermission') : undefined
+            // A server mapped to a Docker container installs and updates the
+            // game inside that container (its image/entrypoint), not through
+            // the panel's SteamCMD: the install folder may not even be
+            // writable from here.
+            const containerManaged = resolveClientProvider(server) === 'docker-local'
             const menuItems: RowActionItem[] = [
               { label: t('card.edit'), icon: Edit2, onSelect: () => setEditingServer({ ...server }) },
               ...(!server.isActive
@@ -2220,7 +2225,7 @@ export default function Servers() {
                     reason: !canServersManage ? t('card.noPermissionManage') : undefined,
                   }]
                 : []),
-              ...(!server.isRemote
+              ...(!server.isRemote && !containerManaged
                 ? [
                     { label: t('card.updateServer'), icon: RefreshCw, onSelect: () => void openSteamOperation(server, 'update'), disabled: !canServerInstall, reason: steamReason },
                     { label: t('card.verifyFiles'), icon: ShieldCheck, onSelect: () => void openSteamOperation(server, 'verify'), disabled: !canServerInstall, reason: steamReason },
@@ -2566,7 +2571,13 @@ export default function Servers() {
                     <HelpTip label={t('card.configureSftp')}>{t('card.configureSftpTip')}</HelpTip>
                   </div>
                 )}
-                {hasUpdate && (
+                {hasUpdate && containerManaged && (
+                  <span className="inline-flex items-center gap-1.5 rounded-md border border-warning/40 px-2.5 py-1 text-xs font-medium text-warning">
+                    <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" /> {t('card.updateAvailable')}
+                    <HelpTip label={t('card.updateAvailable')}>{t('card.updateViaContainer')}</HelpTip>
+                  </span>
+                )}
+                {hasUpdate && !containerManaged && (
                   <DisabledReason reason={steamReason}>
                     <Button
                       size="sm"
@@ -3340,7 +3351,14 @@ export default function Servers() {
                 </div>
               </section>
 
-              {!editingServer.isRemote && (
+              {!editingServer.isRemote && resolveClientProvider(editingServer) === 'docker-local' && (
+              <section aria-labelledby="edit-server-launch" className={EDIT_SECTION}>
+                <h3 id="edit-server-launch" className="text-sm font-medium text-foreground">{t('editDialog.sectionLaunch')}</h3>
+                <p className="text-xs text-muted-foreground">{t('editDialog.launchManagedByContainer')}</p>
+              </section>
+              )}
+
+              {!editingServer.isRemote && resolveClientProvider(editingServer) !== 'docker-local' && (
               <section aria-labelledby="edit-server-launch" className={EDIT_SECTION}>
                 <h3 id="edit-server-launch" className="text-sm font-medium text-foreground">{t('editDialog.sectionLaunch')}</h3>
                 {managedLifecycleSupported && !editingServer.dockerContainerName && !editingServer.dockerContainerId && (
