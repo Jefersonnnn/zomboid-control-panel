@@ -95,6 +95,8 @@
     "windowsPath": "Windows：",
     "linuxPath": "Linux：",
     "linuxHint": "（或服务器实际运行所在的位置）",
+    "dockerPath": "Docker：",
+    "dockerHint": "（面板容器内的路径，即卷挂载的右侧部分）",
     "mustContain": "服务器至少启动一次后，该文件夹内必须包含 <1>Saves/Multiplayer/</1> 子文件夹。",
     "pointDirect": "您也可以直接指向单个存档文件夹（例如 <1>.../Saves/Multiplayer/MyServer</1>）。",
     "setCustomPath": "设置自定义路径",

@@ -3761,7 +3761,11 @@ export default function WorldMap() {
             </div>
             <div className="flex items-center gap-1 px-2.5 py-1.5" title={t('hud.zoomTitle')}>
               <ZoomIn className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
-              <span className="font-mono text-muted-foreground">{(scale / mapCfg.defaultScale * 100).toFixed(0)}%</span>
+              {/* Before the map's tile info has loaded (or when it failed) the
+                  ratio can be NaN/Infinity: show a dash, not "NaN%". */}
+              <span className="font-mono text-muted-foreground">
+                {Number.isFinite(scale / mapCfg.defaultScale) ? `${(scale / mapCfg.defaultScale * 100).toFixed(0)}%` : '—'}
+              </span>
             </div>
           </div>
         </div>

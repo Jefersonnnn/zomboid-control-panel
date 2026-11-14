@@ -119,6 +119,8 @@
     "windowsPath": "Windows:",
     "linuxPath": "Linux:",
     "linuxHint": "(або звідки запускається сервер)",
+    "dockerPath": "Docker:",
+    "dockerHint": "(шлях усередині контейнера панелі, права частина монтування тому)",
     "mustContain": "Вона має містити підтеку <1>Saves/Multiplayer/</1> після того, як сервер було запущено хоча б один раз.",
     "pointDirect": "Також можна вказати безпосередньо теку окремого збереження (напр. <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "Задати власний шлях",

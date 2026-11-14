@@ -96,6 +96,8 @@
     "windowsPath": "Windows:",
     "linuxPath": "Linux:",
     "linuxHint": "(oswa nenpòt kote sèvè a ap fonksyone)",
+    "dockerPath": "Docker:",
+    "dockerHint": "(chemen an andedan kontenè panèl la, bò dwat volim ki monte a)",
     "mustContain": "Li dwe genyen yon sou-dosye <1>Saves/Multiplayer</1> yon fwa sèvè a te demare omwen yon fwa.",
     "pointDirect": "Ou ka tou vize dirèkteman yon sèl dosye sovgad (pa egzanp <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "Defini chemen pèsonalize",

@@ -95,6 +95,8 @@
     "windowsPath": "Windows :",
     "linuxPath": "Linux :",
     "linuxHint": "(ou l'endroit d'où le serveur s'exécute)",
+    "dockerPath": "Docker :",
+    "dockerHint": "(le chemin dans le conteneur du panneau, la partie droite du montage de volume)",
     "mustContain": "Il doit contenir un sous-dossier <1>Saves/Multiplayer/</1> une fois que le serveur a démarré au moins une fois.",
     "pointDirect": "Vous pouvez aussi pointer directement vers un dossier de sauvegarde unique (par ex. <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "Définir un chemin personnalisé",

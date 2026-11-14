@@ -141,6 +141,8 @@
     "windowsPath": "Windows:",
     "linuxPath": "Linux:",
     "linuxHint": "(أو حيثما يعمل الخادم)",
+    "dockerPath": "Docker:",
+    "dockerHint": "(المسار داخل حاوية اللوحة، أي الجانب الأيمن من ربط وحدة التخزين)",
     "mustContain": "يجب أن يحتوي على مجلد فرعي باسم <1>Saves/Multiplayer/</1> بمجرد تشغيل الخادم مرة واحدة على الأقل.",
     "pointDirect": "يمكنك أيضًا الإشارة مباشرة إلى مجلد حفظ واحد (مثل <1>.../Saves/Multiplayer/MyServer</1>).",
     "setCustomPath": "تعيين مسار مخصص",
